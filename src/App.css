@@ -4,3 +4,18 @@
     gap: 20px; /* Optional: Adds space between columns */
 }
 
+.items_selection{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.wishlist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: red;
+    border-radius: 20px;
+    padding: 0.5vh;
+    margin-bottom: 2vh;
+}

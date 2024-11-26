@@ -4,9 +4,12 @@ import Item from './Item'; // Import the Item component
 import WishlistMenu from './WishlistMenu';
 import '../App.css';
 
+
 const App = () => {
     const [items, setItems] = useState([]);
+    const [refreshWishlists, setRefreshWishlists] = useState(false);
 
+    const user_id = "2"; 
     useEffect(() => {
         const fetchItems = async () => {
             try {
@@ -27,7 +30,7 @@ const App = () => {
         const fetchWishlists = async () => {
             try {
                 const response = await axios.get('http://localhost:3001/wishlists');
-                console.log('Fetched wishlists:', response.data); // Debugging line
+                console.log('Fetched wishlists:', response.data); 
                 setWishlists(response.data);
             } catch (error) {
                 console.error('Error fetching wishlists', error);
@@ -35,15 +38,16 @@ const App = () => {
         };
 
         fetchWishlists();
-    }, []);
+    }, [refreshWishlists]);
 
 
     return (
         <div className="main_container">
-            <WishlistMenu wishlists={wishlists} />
+            <WishlistMenu wishlists={wishlists} user_id={user_id} onFormSubmit={() => setRefreshWishlists((prev) => !prev)}/>
             <div>
                 <h1>Items List</h1>
-                {items.length > 0 ? (
+                <div className='items_selection'>
+                {items.length > 0 && items.length < 7? (
                     items.map(item => (
                         <Item id={item._id} 
                             name={item.name} 
@@ -56,6 +60,7 @@ const App = () => {
                 ) : (
                     <p>No items available</p>
                 )}
+                </div>
             </div>
         </div>
     );
