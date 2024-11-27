@@ -1,8 +1,9 @@
 import React from 'react';
 import Wishlist from './Wishlist';
 import AddWishlistBTN from './AddWishlistBTN.jsx';
+import AddItem from './AddItem.jsx';
 
-const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems }) => {
+const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems, user_id, activeWishlistId }) => {
     const deleteWishlist = async (id) => {
         try {
             const response = await fetch(`http://localhost:3001/wishlist/${id}`, {
@@ -31,6 +32,7 @@ const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems }) => {
 
     return (
         <div className="wishlist-menu">
+            <AddItem user_id={user_id} activeWishlistId={activeWishlistId} refreshItems={refreshItems}/>
             <h2>Select a Wishlist</h2>
             <div className="wishlist-buttons">
                 {wishlists.map((wishlist) => (
@@ -44,7 +46,7 @@ const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems }) => {
                     />
                 ))}
             </div>
-            <AddWishlistBTN onFormSubmit={onFormSubmit} />
+            <AddWishlistBTN onFormSubmit={onFormSubmit} user_id={user_id}/>
         </div>
     );
 };

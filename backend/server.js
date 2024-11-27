@@ -6,6 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 mongoose.connect('mongodb://localhost:27017/wishlistApp', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -15,7 +16,6 @@ mongoose.connect('mongodb://localhost:27017/wishlistApp', {
 
 const ItemSchema = new mongoose.Schema({
     name: String,
-    quantity: Number,
     price: Number,
     wishlist_id: String,
     user_id: String,
@@ -34,6 +34,47 @@ app.get('/items', async (req, res) => {
         res.json(items);
     } catch (error) {
         res.status(500).send('Error retrieving items');
+    }
+});
+
+app.post('/items', async (req, res) => {
+    console.log('Received POST request:', req.body)
+    const { description, link_shop, name, photo, price, user_id, wishlist_id} = req.body;
+
+    // Validate required fields
+    if (!name || !price || !wishlist_id || !user_id) {
+        return res.status(400).json({ error: 'Missing required fields: name, price, wishlist_id, or user_id' });
+    }
+
+    const newItem = new Item({
+        name,
+        price,
+        wishlist_id,
+        user_id,
+        description,
+        photo,
+        link_shop
+    });
+
+    try {
+        const savedItem = await newItem.save();
+        res.status(201).json({ message: 'Item created successfully', item: savedItem });
+    } catch (error) {
+        console.error('Error creating item:', error);
+        res.status(500).json({ error: 'Failed to create item' });
+    }
+});
+
+app.delete('/items/:item_id', async (req, res) => {
+    const { item_id } = req.params;
+    try {
+        const deletedItem = await Item.findByIdAndDelete(item_id);
+        if (!deletedItem) {
+            return res.status(404).json({ error: 'Item not found' });
+        }
+        res.status(200).json({ message: 'Item deleted successfully', deletedItem });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete item' });
     }
 });
 
@@ -66,6 +107,7 @@ app.post('/wishlist', async (req, res) => {
         const newWishlist = await wishlist.save();
         res.status(201).json(newWishlist);
     } catch (error) {
+        console.error(error);
         res.status(400).json({ error: error.message });
     }
 });
