@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Wishlist = ({ name, id, user_id, onDelete, onEdit }) => {
+const Wishlist = ({ name, id, onDelete, onEdit, refreshItems }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [newName, setNewName] = useState(name);
 
@@ -9,8 +9,12 @@ const Wishlist = ({ name, id, user_id, onDelete, onEdit }) => {
         setIsEditing(false);
     };
 
+    const handleSelectWishlist = () => {
+        refreshItems(id);
+    };
+
     return (
-        <div className="wishlist" wishlist_id={id} onClick={() => {console.log(id)}}>
+        <div className="wishlist" onClick={handleSelectWishlist}>
             {!isEditing ? (
                 <>
                     <h3>{name}</h3>
