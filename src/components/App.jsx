@@ -13,22 +13,38 @@ const App = () => {
     const [wishlists, setWishlists] = useState([]);
     const [refreshWishlists, setRefreshWishlists] = useState(false);
     const [user_id, setUser] = useState({
-        state: false,
+        state: true,
         username: '',
-        password: '',
+        user_id:'',
     });
 
     
-    const Login = async (username, password) => {
+    const Login = async (username, password, signEmail = null) => {
         try {
-            // add login logic here
-            if (username === 'admin' && password === 'password') {
-                setUser({ state: true, username, password });
+            if (signEmail) {
+                const response = await axios.post('http://localhost:3001/signup', {
+                    username,
+                    password,
+                    email: signEmail,
+                });
+                if (response) {
+                    alert('Signup successful. Please login.');
+                } else {
+                    alert('Signup failed: ' + response.data.message);
+                }
             } else {
-                alert('Invalid credentials');
+                const response = await axios.get('http://localhost:3001/login', {
+                    username,
+                    password,
+                });
+                if (response) {
+                    setUser({ state: true, username, user_id });
+                } else {
+                    alert('Invalid credentials');
+                }
             }
         } catch (error) {
-            console.error('Error during login', error);
+            console.error('Error during login/signup', error);
         }
     };
 
