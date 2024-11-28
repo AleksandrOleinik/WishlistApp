@@ -10,7 +10,7 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
         price: '',
         description: '',
         user_id: '',
-        linkToShop: ''
+        link_shop: ''
     });
 
     const handleInputChange = (e) => {
@@ -49,7 +49,7 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
                 price: '',
                 description: '',
                 user_id: '',
-                linkToShop: ''});
+                link_shop: ''});
         } catch (error) {
             console.error('Error adding item:', error);
         }
@@ -110,8 +110,8 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
                     <label>
                         Link To the Shop:
                         <textarea
-                            name="linkToShop"
-                            value={formData.linkToShop}
+                            name="link_shop"
+                            value={formData.link_shop}
                             onChange={handleInputChange}
                             placeholder="Enter link to the shop"
                             required

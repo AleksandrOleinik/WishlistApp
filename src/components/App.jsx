@@ -71,6 +71,7 @@ const App = () => {
                                 user_id={item.user_id}
                                 wishlist_id={item.wishlist_id}
                                 image_link={item.photo}
+                                link_shop={item.link_shop}
                                 refreshItems={handleRefreshItems}
                                 activeWishlistId={activeWishlistId}
                             />

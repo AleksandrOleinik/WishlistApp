@@ -78,6 +78,28 @@ app.delete('/items/:item_id', async (req, res) => {
     }
 });
 
+app.put('/items/:item_id', async (req, res) => {
+    console.log('Received PUT request:', req.body);
+    const { item_id } = req.params;
+    const { description, link_shop, name, price, photo } = req.body;
+
+    try {
+        const updatedItem = await Item.findByIdAndUpdate(
+            item_id,
+            { description, link_shop, name, price, photo},
+            { new: true }
+        );
+
+        if (!updatedItem) {
+            return res.status(404).json({ error: 'Item not found' });
+        }
+        res.status(200).json({ message: 'Item updated successfully', updatedItem });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to update item' });
+    }
+});
+
+
 const WishlistSchema = new mongoose.Schema({
     user_id: { type: String, required: true },
     name: { type: String, required: true },
