@@ -4,7 +4,13 @@ import axios from 'axios';
 
 const Header = () => {
     
-    
-    return  
+    return (
+        <header className="header">
+            <h1>My Wishlist</h1>
+        
+        </header>
+    );
 
 }
+
+export default Header;

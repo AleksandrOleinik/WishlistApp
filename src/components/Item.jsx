@@ -48,6 +48,15 @@ const Item = (props) => {
         }
     };
 
+    const openLink = () => {
+        if (props.link_shop) {
+            window.open(props.link_shop, '_blank'); // Opens the link in a new tab
+        } else {
+            alert('No link available');
+        }
+    };
+    
+
     return (
         <div className="wishlist-item">
             {isEditing ? (
@@ -106,7 +115,7 @@ const Item = (props) => {
                         >
                             🚫
                         </button>
-                        <button className="action-btn">🔗</button>
+                        <button className="action-btn" onClick={openLink}>🔗</button>
                         <button className="action-btn" onClick={() => setIsEditing(true)}>
                             ✏️
                         </button>
