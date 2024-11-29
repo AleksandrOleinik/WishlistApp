@@ -56,9 +56,9 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
     };
     
     return (
-        <div className="add-item">
+        <div className="add_item">
             {!isAdding ? (
-                <button onClick={() => setIsAdding(true)}>Add Item</button>
+                <button onClick={() => setIsAdding(true)} className='add_item_btn'>Add Item</button>
             ) : (
                 <form onSubmit={(e) => {
                     handleAddItem(e);

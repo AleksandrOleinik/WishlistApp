@@ -4,7 +4,7 @@ import React,{useState} from "react";
 const AddWishlistBTN = ({user_id, onFormSubmit}) => { 
 
     const [isEditing, setIsEditing] = useState(false);
-    const [inputText, setInputText] = useState("Add");
+    const [inputText, setInputText] = useState("New Wishlist");
     const generateUniqueId = () => {
         return `${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
     };
@@ -46,6 +46,11 @@ const AddWishlistBTN = ({user_id, onFormSubmit}) => {
         setInputText(e.target.value);
     };
 
+    const handleCancel = () => {
+        setIsEditing(false);
+        setInputText('New Wishlist');
+    };
+
     return (
         !isEditing ? (
         <button className="wishlist_add_button" onClick={() => setIsEditing(true)}>
@@ -63,12 +68,12 @@ const AddWishlistBTN = ({user_id, onFormSubmit}) => {
             <button type="submit" className="wishlist-ok-button">
                 OK
             </button>
+            <button type="button" className="wishlist-cancel-button" onClick={handleCancel}>
+                    Cancel
+                </button>
         </form>
     )
     );
   };
-
-
-
 
 export default AddWishlistBTN;

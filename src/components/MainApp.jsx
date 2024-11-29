@@ -105,7 +105,6 @@ const MainApp = ({ LoginStatus }) => {
                         activeWishlistId={activeWishlistId}
                     />
                     <div>
-                        <h1>Items List</h1>
                         <div className="items_selection">
                             {currentItems.length > 0 ? (
                                 currentItems.map((item) => (
@@ -134,8 +133,8 @@ const MainApp = ({ LoginStatus }) => {
                             >
                                 Previous
                             </button>
-                            <span>
-                                Page {currentPage} of {totalPages}
+                            <span className='pagination_num'>
+                                {currentPage} of {totalPages}
                             </span>
                             <button
                                 onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}

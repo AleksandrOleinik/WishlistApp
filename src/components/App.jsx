@@ -4,6 +4,9 @@ import MainApp from './MainApp';
 import Login from './Login'; 
 import ViewPage from './ViewPage';
 import '../App.css';
+import '../LoginPage.css'
+import '../WishlistMenu.css'
+import '../ItemsOverview.css'
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);

@@ -1,0 +1,85 @@
+
+.items_selection{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;;
+    align-items: center;
+    justify-content: center; 
+    background-color: #caaacd;
+    border-radius: 20px;
+    padding: 2vh; 
+    width: 58vw; 
+    height: 80vh; 
+
+}
+
+.item_photo{
+    width: 15vw;
+    height: 15vw;
+    border-radius: 20px;
+    border: 0.5vh solid black;
+}
+
+.wishlist_item{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+}
+
+.wishlist_item h4{
+    height: 3.5vh;
+    padding: 0;
+    margin: 0;
+    color: #fdf3dd;
+    font-weight: 900;
+    font-size: 1.3rem;
+}
+
+.wishlist_item .item_price{ 
+    height: 3vh;
+    padding: 0;
+    margin: 0.5vh 0 0 0;
+    color: #fdf3dd;
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+
+.wishlist_item .item_description{ 
+    height: 12vh;
+    padding: 0;
+    margin: 0.5vh 0 0 0;
+    color: #fdf3dd;
+    font-weight: 500;
+    font-size: 1.2rem;
+    width: 15vw;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.pagination{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1vh;
+    gap: 1vw;
+}
+
+.pagination button{
+    background-color: #6dcb6e;
+    border-radius: 20px;
+    border: 2px solid black; 
+    width: 10vw; 
+    place-self: center;
+    align-self: center;
+    font-size: calc(0.4vw + 0.4vh + 0.4rem);
+    font-weight: bold;
+}
+
+.pagination_num{
+    font-size: 1rem;
+    font-weight: bold;
+
+}

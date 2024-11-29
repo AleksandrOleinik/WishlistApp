@@ -31,9 +31,11 @@ const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems, user_id, activeWi
     };
 
     return (
-        <div className="wishlist-menu">
+
+        <div className="wishlist_menu">
+            <div className='wishlist_menu_top'>
             <AddItem user_id={user_id} activeWishlistId={activeWishlistId} refreshItems={refreshItems}/>
-            <h2>Select a Wishlist</h2>
+            <h2>Wishlists:</h2>
             <div className="wishlist-buttons">
                 {wishlists.map((wishlist) => (
                     <Wishlist
@@ -47,8 +49,10 @@ const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems, user_id, activeWi
                     />
                 ))}
             </div>
+            </div>
             <AddWishlistBTN onFormSubmit={onFormSubmit} user_id={user_id}/>
         </div>
+
     );
 };
 

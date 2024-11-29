@@ -17,18 +17,18 @@ const Wishlist = ({ name, id, onDelete, onEdit, refreshItems }) => {
         <div className="wishlist" onClick={handleSelectWishlist}>
             {!isEditing ? (
                 <>
+                    <button onClick={() => setIsEditing(true)}>Edit name</button>
                     <h3>{name}</h3>
-                    <button onClick={() => setIsEditing(true)}>Edit</button>
                     <button onClick={() => onDelete(id)}>Delete</button>
                 </>
             ) : (
                 <>
+                    <button onClick={handleEdit}>Save</button>
                     <input
                         type="text"
                         value={newName}
                         onChange={(e) => setNewName(e.target.value)}
                     />
-                    <button onClick={handleEdit}>Save</button>
                     <button onClick={() => setIsEditing(false)}>Cancel</button>
                 </>
             )}
