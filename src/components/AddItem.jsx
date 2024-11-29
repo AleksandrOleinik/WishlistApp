@@ -24,7 +24,7 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
     const handleAddItem = async (e) => {
         e.preventDefault();
         
-        // Ensure user_id and wishlist_id are correctly passed
+
         if (!user_id || !activeWishlistId) {
             console.error('Missing user_id or activeWishlistId');
             return;

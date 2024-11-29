@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import{Navigate} from 'react-router-dom';
-import MainApp from './MainApp'; // Extracted main content of App
-import Login from './Login'; // New Login component
+import MainApp from './MainApp'; 
+import Login from './Login'; 
 import '../App.css'
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
         }
     };
 
-    // Update isAuthenticated on component mount and whenever localStorage changes
+    
     useEffect(() => {
         setIsAuthenticated(checkAuth());
         setLoading(false);

@@ -36,7 +36,7 @@ const AddWishlistBTN = ({user_id, onFormSubmit}) => {
             console.log('Wishlist created successfully:', result);
 
             setInputText("Add");
-            onFormSubmit(); // Notify parent or refresh wishlists
+            onFormSubmit(); 
         } catch (error) {
             console.error('Error creating wishlist:', error.message);
         }

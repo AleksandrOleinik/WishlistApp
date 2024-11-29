@@ -41,8 +41,8 @@ const Item = (props) => {
             });
 
             if (!response.ok) throw new Error('Failed to update item');
-            props.refreshItems(props.activeWishlistId); // Refresh items after update
-            setIsEditing(false); // Exit editing mode
+            props.refreshItems(props.activeWishlistId); 
+            setIsEditing(false); 
         } catch (error) {
             console.error('Error updating item:', error.message);
         }
@@ -50,7 +50,7 @@ const Item = (props) => {
 
     const openLink = () => {
         if (props.link_shop) {
-            window.open(props.link_shop, '_blank'); // Opens the link in a new tab
+            window.open(props.link_shop, '_blank'); 
         } else {
             alert('No link available');
         }

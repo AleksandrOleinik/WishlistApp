@@ -28,6 +28,43 @@ const User = mongoose.model('User', UserSchema);
 
 const bcrypt = require('bcrypt');
 
+
+
+
+app.post('/view/:user_id', async (req, res) => {
+    console.log('Received GET request:', req.params);
+    const { user_id } = req.params;
+
+    try {
+        // Fetch user by user_id
+        const user = await User.findOne({ user_id });
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Fetch wishlists assigned to the user
+        const wishlists = await Wishlist.find({ user_id });
+
+        res.status(200).json({
+            message: 'User information retrieved successfully',
+            user: {
+                username: user.username,
+                name: user.name,
+                user_id: user.user_id,
+            },
+            wishlists,
+        });
+    } catch (error) {
+        console.error('Error fetching user or wishlists:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+
+
+
+
 app.post('/signup', async (req, res) => {
     const { username, password, name } = req.body;
     console.log("Received POST request for signup:", req.body);
@@ -102,14 +139,19 @@ const Item = mongoose.model('Item', ItemSchema);
 
 app.get('/items', async (req, res) => {
     try {
-        const { wishlist_id } = req.query; // Get the wishlist_id from query params
-        const query = wishlist_id ? { wishlist_id } : {}; // Filter by wishlist_id if provided
-        const items = await Item.find(query);
+        const { wishlist_id, user_id } = req.query; 
+        const query = { 
+            ...(wishlist_id && { wishlist_id }), 
+            ...(user_id && { user_id }),       
+        };
+
+        const items = await Item.find(query); 
         res.json(items);
     } catch (error) {
         res.status(500).send('Error retrieving items');
     }
 });
+
 
 app.post('/items', async (req, res) => {
     console.log('Received POST request:', req.body)
@@ -185,13 +227,16 @@ const WishlistSchema = new mongoose.Schema({
 const Wishlist = mongoose.model('Wishlist', WishlistSchema);
 
 app.get('/wishlists', async (req, res) => {
+    const { user_id } = req.query; // Extract user_id from query parameters
     try {
-        const wishlists = await Wishlist.find({});
+        // Find wishlists for the specific user
+        const wishlists = await Wishlist.find({ user_id: user_id });
         res.json(wishlists);
     } catch (error) {
         res.status(500).send('Error retrieving wishlists');
     }
 });
+
 
 app.post('/wishlist', async (req, res) => {
     console.log('Received POST request:', req.body);

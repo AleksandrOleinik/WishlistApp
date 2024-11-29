@@ -17,17 +17,17 @@ const Login = ({onLogin}) => {
         const { username, password, name } = credentials;
         try {
             if (isSignUp) {
-                console.log(credentials);
+                //console.log(credentials);
                 await axios.post('http://localhost:3001/signup', { username, password, name });
                 setIsSignUp(false);
             } else {
                 const response = await axios.post('http://localhost:3001/login', { name, password });
                 if (response.data) {
-                    console.log('User logged in:', response.data);
+                    //console.log('User logged in:', response.data);
                     localStorage.setItem('user', JSON.stringify(response.data));
                     console.log("check the user",localStorage.getItem('user'));
                     onLogin();
-                    navigate('/Wishlists'); // Ensure navigation happens after localStorage is updated
+                    navigate('/Wishlists'); 
                 }
                  else {
                     alert('Invalid credentials');

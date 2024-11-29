@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import MainApp from './MainApp'; // Extracted main content of App
-import Login from './Login'; // New Login component
+import MainApp from './MainApp'; 
+import Login from './Login'; 
+import ViewPage from './ViewPage';
 import '../App.css';
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true); // Track loading state
+    const [loading, setLoading] = useState(true); 
 
     const checkAuth = () => {
         try {
@@ -19,10 +20,10 @@ const App = () => {
     };
 
     useEffect(() => {
-        // Perform the authentication check
+        
         const isAuth = checkAuth();
         setIsAuthenticated(isAuth);
-        setLoading(false); // Mark loading as complete
+        setLoading(false); 
     }, []);
 
     const handleLogin = () => {
@@ -30,7 +31,7 @@ const App = () => {
     };
 
     if (loading) {
-        // Show a loading spinner or placeholder while the auth state is being determined
+        
         return <div>Loading...</div>;
     }
 
@@ -46,6 +47,10 @@ const App = () => {
                     element={
                         isAuthenticated ? <MainApp LoginStatus={isAuthenticated}/> : <Navigate to="/login" />
                     }
+                />
+                <Route
+                    path="/View/:id" 
+                    element={<ViewPage />}
                 />
             </Routes>
         </Router>
