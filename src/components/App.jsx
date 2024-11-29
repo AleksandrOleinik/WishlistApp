@@ -1,134 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Item from './Item';
-import WishlistMenu from './WishlistMenu';
-import Header from './Header';
-
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import MainApp from './MainApp'; // Extracted main content of App
+import Login from './Login'; // New Login component
 import '../App.css';
 
 const App = () => {
-    const [items, setItems] = useState([]);
-    const [activeWishlistId, setActiveWishlistId] = useState(null);
-    const [refreshItems, setRefreshItems] = useState(false);
-    const [wishlists, setWishlists] = useState([]);
-    const [refreshWishlists, setRefreshWishlists] = useState(false);
-    const [user_id, setUser] = useState({
-        state: true,
-        username: '',
-        user_id:'',
-    });
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true); // Track loading state
 
-    
-    const Login = async (username, password, signEmail = null) => {
+    const checkAuth = () => {
         try {
-            if (signEmail) {
-                const response = await axios.post('http://localhost:3001/signup', {
-                    username,
-                    password,
-                    email: signEmail,
-                });
-                if (response) {
-                    alert('Signup successful. Please login.');
-                } else {
-                    alert('Signup failed: ' + response.data.message);
-                }
-            } else {
-                const response = await axios.get('http://localhost:3001/login', {
-                    username,
-                    password,
-                });
-                if (response) {
-                    setUser({ state: true, username, user_id });
-                } else {
-                    alert('Invalid credentials');
-                }
-            }
+            const user = JSON.parse(localStorage.getItem('user'));
+            return user && user.user_id && user.name;
         } catch (error) {
-            console.error('Error during login/signup', error);
+            console.error('Error parsing user from localStorage', error);
+            return false;
         }
     };
 
-    
     useEffect(() => {
-        if (user_id.state) {
-            const fetchItems = async () => {
-                try {
-                    const params = activeWishlistId ? { params: { wishlist_id: activeWishlistId } } : {};
-                    const response = await axios.get('http://localhost:3001/items', params);
-                    setItems(response.data);
-                    console.log(response.data);
-                } catch (error) {
-                    console.error('Error fetching items', error);
-                }
-            };
-            fetchItems();
-        }
-    }, [user_id.state, activeWishlistId, refreshItems]);
+        // Perform the authentication check
+        const isAuth = checkAuth();
+        setIsAuthenticated(isAuth);
+        setLoading(false); // Mark loading as complete
+    }, []);
 
-    useEffect(() => {
-        if (user_id.state) {
-        const fetchWishlists = async () => {
-            try {
-                const response = await axios.get('http://localhost:3001/wishlists');
-                console.log("Wishlist HEEEERE: ",response.data[0].wishlist_id);
-                setWishlists(response.data);
-                if (activeWishlistId === null && response.data.length > 0) {
-                    setActiveWishlistId(response.data[0].wishlist_id);}
-            } catch (error) {
-                console.error('Error fetching wishlists', error);
-            }
-        };
-        fetchWishlists();}
-    }, [user_id.state, refreshWishlists]);
-
-    const handleRefreshItems = (wishlistId) => {
-        if (user_id.state) {
-        
-        setActiveWishlistId(wishlistId);
-        setRefreshItems((prev) => !prev);}
+    const handleLogin = () => {
+        setIsAuthenticated(checkAuth());
     };
+
+    if (loading) {
+        // Show a loading spinner or placeholder while the auth state is being determined
+        return <div>Loading...</div>;
+    }
 
     return (
-        <div>
-            {user_id.state ? (
-                <div className='main_page'>
-                <Header onSubmit={Login}/>
-                <div className="main_container">
-                    <WishlistMenu
-                        wishlists={wishlists}
-                        onFormSubmit={() => setRefreshWishlists((prev) => !prev)}
-                        refreshItems={handleRefreshItems}
-                        user_id={user_id}
-                        activeWishlistId={activeWishlistId}
-                    />
-                    <div>
-                        <h1>Items List</h1>
-                        <div className="items_selection">
-                            {items.length > 0 ? (
-                                items.map((item) => (
-                                    <Item
-                                        key={item._id}
-                                        id={item._id}
-                                        name={item.name}
-                                        price={item.price}
-                                        description={item.description}
-                                        user_id={item.user_id}
-                                        wishlist_id={item.wishlist_id}
-                                        image_link={item.photo}
-                                        link_shop={item.link_shop}
-                                        refreshItems={handleRefreshItems}
-                                        activeWishlistId={activeWishlistId}
-                                    />
-                                ))
-                            ) : (
-                                <p>No items available</p>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>) : 
-            (<h1>Access declined</h1>)}
-         </div>  
+        <Router>
+            <Routes>
+                <Route 
+                    path="/login" 
+                    element={<Login onLogin={handleLogin}/>} 
+                />
+                <Route
+                    path="/Wishlists"
+                    element={
+                        isAuthenticated ? <MainApp LoginStatus={isAuthenticated}/> : <Navigate to="/login" />
+                    }
+                />
+            </Routes>
+        </Router>
     );
 };
 

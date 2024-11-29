@@ -1,42 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, {useState, useEffect} from 'react';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import{Navigate} from 'react-router-dom';
+import MainApp from './MainApp'; // Extracted main content of App
+import Login from './Login'; // New Login component
+import '../App.css'
 
 const App = () => {
-    const [wishlists, setWishlists] = useState([]);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true)
+    
+    const checkAuth = () => {
+        try {
+            const user = JSON.parse(localStorage.getItem('user'));
+            return user && user.user_id && user.name;
+        } catch (error) {
+            console.error('Error parsing user from localStorage', error);
+            return false;
+        }
+    };
 
+    // Update isAuthenticated on component mount and whenever localStorage changes
     useEffect(() => {
-        const fetchWishlists = async () => {
-            try {
-                const response = await axios.get('http://localhost:3001/wishlists');
-                console.log('Fetched wishlists:', response.data); // Debugging line
-                setWishlists(response.data);
-            } catch (error) {
-                console.error('Error fetching wishlists', error);
-            }
-        };
-
-        fetchWishlists();
+        setIsAuthenticated(checkAuth());
+        setLoading(false);
     }, []);
 
+    // Function passed to Login to trigger re-authentication
+    const handleLogin = () => {
+        setIsAuthenticated(checkAuth());
+    };
+    
+    useEffect(() => {
+        localStorage.removeItem('user'); // Clear only the user item
+    }, []);
+
+    if (loading) {
+        // Show a loading spinner or placeholder while the auth state is being determined
+        return <div>Loading...</div>;
+    }
     return (
-        <div>
-            <h1>Wishlists</h1>
-            <ul>
-                {wishlists.length > 0 ? (
-                    wishlists.map(wishlist => (
-                        <li key={wishlist._id}>
-                            <h2>{wishlist.name}</h2>
-                            <p>User ID: {wishlist.user_id}</p>
-                            <p>Wishlist ID: {wishlist.wishlist_id}</p>
-                            <p>Link: {wishlist.link}</p>
-                            <p>Items: {wishlist.items.join(', ')}</p>
-                        </li>
-                    ))
-                ) : (
-                    <p>No wishlists available</p>
-                )}
-            </ul>
-        </div>
+        <Router>
+            <Routes>
+                <Route 
+                    path="/login" 
+                    element={<Login onLogin={handleLogin}/>} 
+                />
+                <Route
+                    path="/Wishlists"
+                    element={
+                        (() => {
+                            console.log('validation of the authentication',isAuthenticated); // Log the value
+                            return isAuthenticated ? <MainApp LoginStatus={isAuthenticated}/> : <Navigate to="/login" />;
+                        })()
+                    }
+                />
+
+            </Routes>
+        </Router>
     );
 };
 

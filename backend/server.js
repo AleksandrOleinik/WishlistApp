@@ -14,6 +14,80 @@ mongoose.connect('mongodb://localhost:27017/wishlistApp', {
     .then(() => console.log('Connected to MongoDB'))
     .catch((error) => console.log('Error connecting to MongoDB', error));
 
+
+const UserSchema = new mongoose.Schema({
+        username:String,
+        passwordHash:String,
+        name:String,
+        wishlists:Array,
+        user_id:String
+    });
+    
+const User = mongoose.model('User', UserSchema);
+    
+
+const bcrypt = require('bcrypt');
+
+app.post('/signup', async (req, res) => {
+    const { username, password, name } = req.body;
+    console.log("Received POST request for signup:", req.body);
+    if (!username || !password || !name) {
+        return res.status(400).json({ error: 'Missing required fields: username, password, or name' });
+    }
+
+    try {
+        const existingUser = await User.findOne({ name });
+        console.log("Existing user:", existingUser);
+        if (existingUser) {
+            return res.status(400).json({ error: 'Email already taken' });
+        }
+        const passwordHash = await bcrypt.hash(password, 10);
+
+        const userCount = await User.countDocuments();
+        const user_id = String(userCount + 1);
+
+        const newUser = new User({ username, passwordHash, name, user_id });
+        const savedUser = await newUser.save();
+        console.log(res)
+        res.status(201).json({ message: 'User created successfully', user_id: savedUser.user_id });
+    } catch (error) {
+        console.error('Error during signup:', error);
+        res.status(500).json({ error: 'Failed to create user' });
+    }
+});
+
+
+app.post('/login', async (req, res) => {
+    console.log('Received POST request for login:', req.body);
+    const { name, password } = req.body;
+
+    if (!name || !password) {
+        return res.status(400).json({ error: 'Missing required fields: username or password' });
+    }
+
+    try {
+
+        const user = await User.findOne({ name });
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+
+        const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+        if (!passwordMatch) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        res.status(200).json(user);
+
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).json({ error: 'Failed to login' });
+    }
+});
+
+
+
 const ItemSchema = new mongoose.Schema({
     name: String,
     price: Number,
@@ -120,6 +194,7 @@ app.get('/wishlists', async (req, res) => {
 });
 
 app.post('/wishlist', async (req, res) => {
+    console.log('Received POST request:', req.body);
     const wishlist = new Wishlist({
         user_id: req.body.user_id,
         name: req.body.name,

@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 
 
-const AddWishlistBTN = ({user_id, onFormSubmit, wishlists}) => { 
+const AddWishlistBTN = ({user_id, onFormSubmit}) => { 
 
     const [isEditing, setIsEditing] = useState(false);
     const [inputText, setInputText] = useState("Add");
