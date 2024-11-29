@@ -44,9 +44,8 @@ const Login = ({onLogin}) => {
     };
 
     return (
-        <div className="login-page">
-            <h1>{isSignUp ? 'Sign Up' : 'Login'}</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="login_page">
+            <form onSubmit={handleSubmit} className='login_form'>
                 {isSignUp?(<input
                     type="text"
                     name="username"
@@ -81,11 +80,10 @@ const Login = ({onLogin}) => {
                         autoComplete='email'
                     />
                 )}
-                <button type="submit">{isSignUp ? 'Sign Up' : 'Login'}</button>
+                <button type="submit" className={isSignUp ? 'signup_button' : 'login_button'}>{isSignUp ? 'Sign Up' : 'Login'}</button>
             </form>
-            <button onClick={toggleMode}>
-                {isSignUp ? 'Switch to Login' : 'Switch to Sign Up'}
-            </button>
+            <button onClick={toggleMode} className={`login_signup_btn ${isSignUp ? 'signup_mode' : 'login_mode'}`}>
+            {isSignUp ? 'Switch to Login' : 'Switch to Sign Up'}</button>
         </div>
     );
 };

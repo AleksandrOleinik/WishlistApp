@@ -7,24 +7,23 @@ const ViewPage = () => {
     const [items, setItems] = useState([]);
     const [wishlists, setWishlists] = useState([]);
     const [activeWishlistId, setActiveWishlistId] = useState(null);
-    const [username, setUsername] = useState(''); // State to store username
-    const [currentPage, setCurrentPage] = useState(1); // Pagination
-    const itemsPerPage = 6; // Items per page
+    const [username, setUsername] = useState(''); 
+    const [currentPage, setCurrentPage] = useState(1);  
+    const itemsPerPage = 6; 
 
-    const { id } = useParams(); // Extract user_id from URL
+    const { id } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserAndWishlists = async () => {
             try {
-                // Fetch user data and associated wishlists
+            
                 const response = await axios.post(`http://localhost:3001/view/${id}`);
                 const { user, wishlists } = response.data;
 
-                setUsername(user.username); // Set the username
-                setWishlists(wishlists); // Set the wishlists
+                setUsername(user.username); 
+                setWishlists(wishlists); 
 
-                // Automatically set the active wishlist
                 if (wishlists.length > 0) {
                     setActiveWishlistId(wishlists[0].wishlist_id);
                 }
@@ -45,7 +44,7 @@ const ViewPage = () => {
                     params: { wishlist_id: activeWishlistId },
                 });
                 setItems(response.data);
-                setCurrentPage(1); // Reset to first page
+                setCurrentPage(1);
             } catch (error) {
                 console.error('Error fetching items:', error);
             }
@@ -54,12 +53,12 @@ const ViewPage = () => {
         fetchItems();
     }, [activeWishlistId]);
 
-    // Calculate items for the current page
+    
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
 
-    // Pagination controls
+    
     const totalPages = Math.ceil(items.length / itemsPerPage);
 
     return (
