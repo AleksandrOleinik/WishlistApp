@@ -5,6 +5,8 @@ const AddWishlistBTN = ({user_id, onFormSubmit}) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [inputText, setInputText] = useState("New Wishlist");
+    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_locally = "http://localhost:3001"
     const generateUniqueId = () => {
         return `${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
     };
@@ -20,7 +22,7 @@ const AddWishlistBTN = ({user_id, onFormSubmit}) => {
         };
 
         try {
-            const response = await fetch('http://localhost:3001/wishlist', {
+            const response = await fetch(`${baseURL_deploy}/wishlist`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

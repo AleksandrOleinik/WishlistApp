@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const Login = ({onLogin}) => {
     const [credentials, setCredentials] = useState({ username: '', password: '', name: '' });
     const [isSignUp, setIsSignUp] = useState(false);
+    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_locally = "http://localhost:3001"
     const navigate = useNavigate();
 
     const handleInputChange = (e) => {
@@ -18,10 +20,10 @@ const Login = ({onLogin}) => {
         try {
             if (isSignUp) {
                 //console.log(credentials);
-                await axios.post('http://localhost:3001/signup', { username, password, name });
+                await axios.post(`${baseURL_deploy}/signup`, { username, password, name });
                 setIsSignUp(false);
             } else {
-                const response = await axios.post('http://localhost:3001/login', { name, password });
+                const response = await axios.post(`${baseURL_deploy}/login`, { name, password });
                 if (response.data) {
                     //console.log('User logged in:', response.data);
                     localStorage.setItem('user', JSON.stringify(response.data));

@@ -11,7 +11,8 @@ const MainApp = ({ LoginStatus }) => {
     const [refreshItems, setRefreshItems] = useState(false);
     const [wishlists, setWishlists] = useState([]);
     const [refreshWishlists, setRefreshWishlists] = useState(false);
-
+    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_locally = "http://localhost:3001"
     const [currentPage, setCurrentPage] = useState(1); 
     const itemsPerPage = 6; 
 
@@ -44,7 +45,7 @@ const MainApp = ({ LoginStatus }) => {
                     'and user_id:',
                     user.user_id
                 );
-                const response = await axios.get('http://localhost:3001/items', {
+                const response = await axios.get(`${baseURL_deploy}/items`, {
                     params: { wishlist_id: activeWishlistId, user_id: user.user_id },
                 });
                 setItems(response.data);
@@ -60,7 +61,7 @@ const MainApp = ({ LoginStatus }) => {
     useEffect(() => {
         const fetchWishlists = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/wishlists', {
+                const response = await axios.get(`${baseURL_deploy}/wishlists`, {
                     params: { user_id: user.user_id },
                 });
                 setWishlists(response.data);

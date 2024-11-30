@@ -1,15 +1,14 @@
+require('dotenv').config({path:'../.env'});
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const MongoDB_connection_string = "mongodb+srv://oleinikas20:X7XCZhf4UEpn708R@cluster0.mvhd9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 
 //mongoose.connect('mongodb://localhost:27017/wishlistApp', {
-    mongoose.connect('mongodb+srv://oleinikas20:X7XCZhf4UEpn708R@cluster0.mvhd9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+    mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

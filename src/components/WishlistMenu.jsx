@@ -4,9 +4,11 @@ import AddWishlistBTN from './AddWishlistBTN.jsx';
 import AddItem from './AddItem.jsx';
 
 const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems, user_id, activeWishlistId }) => {
+    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_locally = "http://localhost:3001"
     const deleteWishlist = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3001/wishlist/${id}`, {
+            const response = await fetch(`${baseURL_deploy}/wishlist/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) throw new Error('Failed to delete wishlist');
@@ -18,7 +20,7 @@ const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems, user_id, activeWi
 
     const editWishlist = async (id, newName) => {
         try {
-            const response = await fetch(`http://localhost:3001/wishlist/${id}`, {
+            const response = await fetch(`${baseURL_deploy}/wishlist/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: newName }),

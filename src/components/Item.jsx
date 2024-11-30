@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 const Item = (props) => {
     const [isEditing, setIsEditing] = useState(false);
+    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_locally = "http://localhost:3001"
     const [updatedItem, setUpdatedItem] = useState({
         description: props.description,
         link_shop: props.link_shop,
@@ -20,7 +22,7 @@ const Item = (props) => {
 
     const deleteItem = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/items/${props.id}`, {
+            const response = await fetch(`${baseURL_deploy}/items/${props.id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) throw new Error('Failed to delete item');
@@ -32,7 +34,7 @@ const Item = (props) => {
 
     const updateItem = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/items/${props.id}`, {
+            const response = await fetch(`${baseURL_deploy}/items/${props.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

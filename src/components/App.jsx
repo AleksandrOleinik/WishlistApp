@@ -12,7 +12,8 @@ import '../AddItem.css'
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true); 
-
+    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_locally = ""
     const checkAuth = () => {
         try {
             const user = JSON.parse(localStorage.getItem('user'));

@@ -10,6 +10,8 @@ const ViewPage = () => {
     const [username, setUsername] = useState(''); 
     const [currentPage, setCurrentPage] = useState(1);  
     const itemsPerPage = 6; 
+    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_locally = "http://localhost:3001"
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -18,7 +20,7 @@ const ViewPage = () => {
         const fetchUserAndWishlists = async () => {
             try {
             
-                const response = await axios.post(`http://localhost:3001/view/${id}`);
+                const response = await axios.post(`${baseURL_deploy}/view/${id}`);
                 const { user, wishlists } = response.data;
 
                 setUsername(user.username); 
@@ -40,7 +42,7 @@ const ViewPage = () => {
             if (!activeWishlistId) return;
 
             try {
-                const response = await axios.get('http://localhost:3001/items', {
+                const response = await axios.get(`${baseURL_deploy}/items`, {
                     params: { wishlist_id: activeWishlistId },
                 });
                 setItems(response.data);

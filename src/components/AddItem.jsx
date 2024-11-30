@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
+    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_locally = "http://localhost:3001"
     const [isAdding, setIsAdding] = useState(false);
     const [formData, setFormData] = useState({
         wishlist_id: '',
@@ -39,7 +41,7 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
             console.log(user_id, activeWishlistId);
             console.log('New Item:', newItem);
     
-            const response = await axios.post('http://localhost:3001/items', newItem);
+            const response = await axios.post(`${baseURL_deploy}/items`, newItem);
             console.log('Item added:', response.data);
     
             setIsAdding(false);
