@@ -29,12 +29,13 @@
     width: 15vw; 
     place-self: center;
     align-self: center;
-    font-size: calc(0.5vw + 0.5vh + 0.5rem);
+    font-size: calc(1vw + 0.2vh + 0.2rem);
     font-weight: bold;
+    overflow:hidden;
 }
 
 .wishlist_menu h2{
-    font-size: calc(1vw + 1vh + 1rem); 
+    font-size: calc(2vw + 0.5vh + 0.5rem); 
     font-weight: bold;
     margin-bottom: 2vh;
     color: #fdf3dd;
@@ -81,4 +82,56 @@
     font-size: calc(0.5vw + 0.5vh + 0.5rem);
     font-weight: bold;
 
+}
+
+.wishlist_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1dfb6;
+    border-radius: 10px;
+    padding: 1vh;
+
+}
+
+.wishlist_form input {
+    margin-bottom: 2vh; 
+    padding: 1vh; 
+    border-radius: 15px;
+    border: 2px solid black;
+    width: 20vw; 
+    height: 1vh; 
+    text-align: center;
+    font-size: 2vh; 
+    font-weight: 900;
+}
+
+.wishlist-ok-button{
+    background-color: #ef601e;
+}
+
+.wishlist-cancel-button{
+    background-color: #6dcb6e;
+}
+
+.wishlist_form button {
+    margin-top:1vh; 
+    width: 20vw; 
+    border-radius: 20px;
+    border: 2px solid black; 
+    font-size: 2vh; 
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.active{
+    background-color:pink ;
+    border-radius: 10px;
+    width: 25vw;
+    height: 10vh;
+}
+
+.active h3{
+    color: #7a0d7c;
 }

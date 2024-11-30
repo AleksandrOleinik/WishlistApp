@@ -63,7 +63,7 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
                 <form onSubmit={(e) => {
                     handleAddItem(e);
                     refreshItems(activeWishlistId);
-                }} className="add-item-form">
+                }} className="add_item_form">
                     <label>
                         Picture Link:
                         <input
@@ -105,6 +105,7 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
                             onChange={handleInputChange}
                             placeholder="Enter item description"
                             required
+                            maxLength={20}
                         />
                     </label>
                     <label>
@@ -118,8 +119,8 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
                         />
                     </label>
                     <div>
-                        <button type="submit">Submit</button>
-                        <button type="button" onClick={() => setIsAdding(false)}>Cancel</button>
+                        <button type="submit"className='add_item_submit'>Submit</button>
+                        <button type="button" onClick={() => setIsAdding(false)} className='add_item_cancel'>Cancel</button>
                     </div>
                 </form>
             )}

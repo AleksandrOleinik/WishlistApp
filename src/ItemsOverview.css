@@ -7,15 +7,15 @@
     justify-content: center; 
     background-color: #caaacd;
     border-radius: 20px;
-    padding: 2vh; 
     width: 58vw; 
-    height: 80vh; 
+    height: 87vh;
+    
 
 }
 
 .item_photo{
-    width: 15vw;
-    height: 15vw;
+    width: 14vw;
+    height: 14vw;
     border-radius: 20px;
     border: 0.5vh solid black;
 }
@@ -25,6 +25,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: start;
+    min-width: 110px;
 
 }
 
@@ -40,10 +41,11 @@
 .wishlist_item .item_price{ 
     height: 3vh;
     padding: 0;
-    margin: 0.5vh 0 0 0;
+    margin: 0.5vh 0 1vh 0;
     color: #fdf3dd;
     font-weight: 500;
     font-size: 1.3rem;
+
 }
 
 .wishlist_item .item_description{ 
@@ -64,7 +66,10 @@
     align-items: center;
     justify-content: center;
     margin-top: 1vh;
-    gap: 1vw;
+    gap: 2vw;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin-bottom: 1vh;
 }
 
 .pagination button{
@@ -82,4 +87,73 @@
     font-size: 1rem;
     font-weight: bold;
 
+}
+
+.wishlist_item button{
+    border-radius: 20px;
+    border: 1px solid black; 
+    width: 5vw; 
+    place-self: center;
+    align-self: center;
+    font-size: calc(0.5vw + 0.5vh + 0.5rem);
+    font-weight: bold;
+}
+
+.edit-item{
+    background-color: #f1dfb6;
+    padding: 1vh;
+    border-radius: 10px;
+    margin-top: 1vh;
+}
+
+.edit-item .form-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-item input {
+    margin-bottom: 2vh; 
+    padding: 1vh; 
+    border-radius: 15px;
+    border: 2px solid black;
+    width: 10vw; 
+    height: 1vh; 
+    text-align: center;
+    font-size: 0.8rem; 
+    font-weight: 900;
+}
+
+.edit-item label {
+    font-size: 0.8rem;
+    font-weight: 900;
+}
+
+.edit-item textarea {
+    margin-bottom: 2vh; 
+    padding: 1vh; 
+    border-radius: 15px;
+    border: 2px solid black;
+    width: 10vw; 
+    height: 10vh; 
+    text-align: center;
+    font-size: 2vh; 
+    font-weight: 900;
+}
+
+.edit-item button{
+    margin-top: 2vh; 
+    border-radius: 20px;
+    border: 2px solid black; 
+    font-size: 0.8rem; 
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 60px;
+}
+
+.edit-item-cancel{
+    background-color: #ef601e;
+}
+
+.edit-item-save{
+    background-color: #6dcb6e;
 }

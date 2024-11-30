@@ -7,6 +7,7 @@ import '../App.css';
 import '../LoginPage.css'
 import '../WishlistMenu.css'
 import '../ItemsOverview.css'
+import '../AddItem.css'
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);

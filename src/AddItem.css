@@ -1,0 +1,57 @@
+.add_item_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1dfb6;
+    border-radius: 10px;
+    padding: 2vh;
+}
+
+.add_item_form input {
+    margin-bottom: 2vh; 
+    padding: 1vh; 
+    border-radius: 15px;
+    border: 2px solid black;
+    width: 20vw; 
+    height: 1vh; 
+    text-align: center;
+    font-size: 2vh; 
+    font-weight: 900;
+}
+
+.add_item_form textarea {
+    margin-bottom: 2vh; 
+    padding: 1vh; 
+    border-radius: 15px;
+    border: 2px solid black;
+    width: 20vw; 
+    height: 10vh; 
+    text-align: center;
+    font-size: 2vh; 
+    font-weight: 900;
+}
+
+.add_item_form label {
+    font-size: 2vh;
+    font-weight: 900;
+}
+
+.add_item_cancel{
+    background-color: #ef601e;
+}
+
+.add_item_submit{
+    background-color: #6dcb6e;
+}
+
+.add_item_form button {
+    margin-top: 2vh; 
+    width: 20vw; 
+    
+    border-radius: 20px;
+    border: 2px solid black; 
+    font-size: 2vh; 
+    font-weight: bold;
+    cursor: pointer;
+}

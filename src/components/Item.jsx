@@ -116,8 +116,8 @@ const Item = (props) => {
                             placeholder="Link to the shop"
                         />
                     </div>
-                    <button onClick={updateItem}>Save</button>
-                    <button onClick={() => setIsEditing(false)}>Cancel</button>
+                    <button onClick={updateItem} className='edit-item-save'>Save</button>
+                    <button onClick={() => setIsEditing(false)} className='edit-item-cancel'>Cancel</button>
                 </div>
             ) : (
                 <>
@@ -126,7 +126,7 @@ const Item = (props) => {
                     {/*<p className="item-wishlist-id">Wishlist ID: {props.wishlist_id}</p>*/}
                     <img src={props.image_link} alt="item_image" className='item_photo'/>
                     <p className="item_price">${props.price}</p>
-                    <p className="item_description">{props.description}</p>
+                    {/*<p className="item_description">{props.description}</p>*/}
                     <div className="item_actions">
                         <button
                             className="action_btn"

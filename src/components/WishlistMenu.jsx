@@ -46,6 +46,7 @@ const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems, user_id, activeWi
                         onEdit={editWishlist}
                         refreshItems={refreshItems}
                         user_id={user_id}
+                        activeWishlistId={activeWishlistId}
                     />
                 ))}
             </div>

@@ -121,12 +121,13 @@ const MainApp = ({ LoginStatus }) => {
                                         refreshItems={handleRefreshItems}
                                         activeWishlistId={activeWishlistId}
                                     />
+
                                 ))
+                                
                             ) : (
                                 <p>Let it shine and add wishes</p>
                             )}
-                        </div>
-                        <div className="pagination">
+                            <div className="pagination">
                             <button
                                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                                 disabled={currentPage === 1}
@@ -142,6 +143,7 @@ const MainApp = ({ LoginStatus }) => {
                             >
                                 Next
                             </button>
+                        </div>
                         </div>
                     </div>
                 </div>

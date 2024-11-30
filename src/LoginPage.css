@@ -19,10 +19,6 @@ body {
     height: 80vh; 
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
 
 .login_form {
     display: flex;

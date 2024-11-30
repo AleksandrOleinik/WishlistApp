@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Wishlist = ({ name, id, onDelete, onEdit, refreshItems }) => {
+const Wishlist = ({ name, id, onDelete, onEdit, refreshItems,activeWishlistId }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [newName, setNewName] = useState(name);
 
@@ -12,9 +12,9 @@ const Wishlist = ({ name, id, onDelete, onEdit, refreshItems }) => {
     const handleSelectWishlist = () => {
         refreshItems(id);
     };
-
+    const isActive = id === activeWishlistId;
     return (
-        <div className="wishlist" onClick={handleSelectWishlist}>
+        <div className={`wishlist ${isActive? 'active' : ''}`} onClick={handleSelectWishlist}>
             {!isEditing ? (
                 <>
                     <button onClick={() => setIsEditing(true)}>Edit name</button>
