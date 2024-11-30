@@ -5,7 +5,7 @@ const AddWishlistBTN = ({user_id, onFormSubmit}) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [inputText, setInputText] = useState("New Wishlist");
-    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
     const baseURL_locally = "http://localhost:3001"
     const generateUniqueId = () => {
         return `${Date.now()}-${Math.floor(Math.random() * 1000000)}`;

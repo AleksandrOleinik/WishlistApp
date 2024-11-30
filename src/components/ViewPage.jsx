@@ -10,7 +10,7 @@ const ViewPage = () => {
     const [username, setUsername] = useState(''); 
     const [currentPage, setCurrentPage] = useState(1);  
     const itemsPerPage = 6; 
-    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
     const baseURL_locally = "http://localhost:3001"
 
     const { id } = useParams();

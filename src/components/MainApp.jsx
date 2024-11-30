@@ -11,7 +11,7 @@ const MainApp = ({ LoginStatus }) => {
     const [refreshItems, setRefreshItems] = useState(false);
     const [wishlists, setWishlists] = useState([]);
     const [refreshWishlists, setRefreshWishlists] = useState(false);
-    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
     const baseURL_locally = "http://localhost:3001"
     const [currentPage, setCurrentPage] = useState(1); 
     const itemsPerPage = 6; 

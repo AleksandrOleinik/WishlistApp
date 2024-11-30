@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = ({onLogin}) => {
     const [credentials, setCredentials] = useState({ username: '', password: '', name: '' });
     const [isSignUp, setIsSignUp] = useState(false);
-    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
     const baseURL_locally = "http://localhost:3001"
     const navigate = useNavigate();
 

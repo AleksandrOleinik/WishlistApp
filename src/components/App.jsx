@@ -12,7 +12,7 @@ import '../AddItem.css'
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true); 
-    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
     const baseURL_locally = ""
     const checkAuth = () => {
         try {

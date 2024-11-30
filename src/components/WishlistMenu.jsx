@@ -4,7 +4,7 @@ import AddWishlistBTN from './AddWishlistBTN.jsx';
 import AddItem from './AddItem.jsx';
 
 const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems, user_id, activeWishlistId }) => {
-    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
     const baseURL_locally = "http://localhost:3001"
     const deleteWishlist = async (id) => {
         try {

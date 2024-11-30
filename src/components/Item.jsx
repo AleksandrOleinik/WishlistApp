@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Item = (props) => {
     const [isEditing, setIsEditing] = useState(false);
-    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
     const baseURL_locally = "http://localhost:3001"
     const [updatedItem, setUpdatedItem] = useState({
         description: props.description,

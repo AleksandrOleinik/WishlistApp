@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
-    const baseURL_deploy ="https://wishlistapp.onrender.com"
+    const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
     const baseURL_locally = "http://localhost:3001"
     const [isAdding, setIsAdding] = useState(false);
     const [formData, setFormData] = useState({
