@@ -95,7 +95,7 @@ const MainApp = ({ LoginStatus }) => {
 
     return (
         <div>
-            <Header Logout={handleLogout} user={user} />
+            <Header Logout={handleLogout} user={user} baseURL_deploy={baseURL_deploy}/>
             <div className="main_page">
                 <div className="main_container">
                     <WishlistMenu

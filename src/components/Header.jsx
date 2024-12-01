@@ -5,7 +5,7 @@ const Header = ({Logout, user,baseURL_deploy}) => {
   return (
     <header>
             <button onClick={Logout}>Log out</button>
-            <p>{`${baseURL_deploy}``/View/``${user.id}`}</p>
+            <p>{`${baseURL_deploy}/View/${user.id}`}</p>
             <h1>{user.username}</h1>
             
         
