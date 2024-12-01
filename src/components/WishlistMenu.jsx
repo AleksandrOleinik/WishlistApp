@@ -5,7 +5,7 @@ import AddItem from './AddItem.jsx';
 
 const WishlistMenu = ({ wishlists, onFormSubmit, refreshItems, user_id, activeWishlistId }) => {
     const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
-    const baseURL_locally = "http://localhost:3001"
+    const baseURL_deploy2 = "http://localhost:3001"
     const deleteWishlist = async (id) => {
         try {
             const response = await fetch(`${baseURL_deploy}/wishlist/${id}`, {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from './Header';
+import '../ViewPage.css'
 
 const ViewPage = () => {
     const [items, setItems] = useState([]);
@@ -11,7 +12,7 @@ const ViewPage = () => {
     const [currentPage, setCurrentPage] = useState(1);  
     const itemsPerPage = 6; 
     const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
-    const baseURL_locally = "http://localhost:3001"
+    const baseURL_deploy2 = "http://localhost:3001"
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -66,33 +67,34 @@ const ViewPage = () => {
     return (
         <div>
             <Header Logout={() => navigate('/login')} user={{ username }} />
-            <div className="main_page">
+            <div className="main_page_view">
                 <div className="main_container">
-                    <div className="wishlist-menu">
+                    <div className="wishlist_menu_view">
                         <h2>Wishlists for {username}</h2>
-                        <ul>
+        
                             {wishlists.map((wishlist) => (
-                                <li
+                                <div
                                     key={wishlist.wishlist_id}
-                                    className={wishlist.wishlist_id === activeWishlistId ? 'active' : ''}
+                                    className={wishlist.wishlist_id === activeWishlistId ? 'wishlist active' : 'wishlist normal' }
                                     onClick={() => setActiveWishlistId(wishlist.wishlist_id)}
+                                
                                 >
+                                    
                                     {wishlist.name}
-                                </li>
+                                </div>
                             ))}
-                        </ul>
+
                     </div>
                     <div>
-                        <h1>Items List</h1>
                         <div className="items_selection">
                             {currentItems.length > 0 ? (
                                 currentItems.map((item) => (
-                                    <div key={item._id} className="item">
+                                    <div key={item._id} className="wishlist_item">
                                         <h3>{item.name}</h3>
                                         <p>Price: ${item.price}</p>
-                                        <p>Description: {item.description}</p>
-                                        {item.photo && <img src={item.photo} alt={item.name} />}
-                                        <p>
+                                        {/*<p>Description: {item.description}</p>*/}
+                                        {item.photo && <img src={item.photo} alt={item.name} className='item_photo'/>}
+                                        <p className='buy_link'>
                                             <a href={item.link_shop} target="_blank" rel="noopener noreferrer">
                                                 Buy Here
                                             </a>
@@ -102,24 +104,26 @@ const ViewPage = () => {
                             ) : (
                                 <p>No items available in this wishlist.</p>
                             )}
+
+                            <div className="pagination">
+                                <button
+                                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                                    disabled={currentPage === 1}
+                                >
+                                    Previous
+                                </button>
+                                <span>
+                                    Page {currentPage} of {totalPages}
+                                </span>
+                                <button
+                                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    Next
+                                </button>
+                            </div>
                         </div>
-                        <div className="pagination">
-                            <button
-                                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                                disabled={currentPage === 1}
-                            >
-                                Previous
-                            </button>
-                            <span>
-                                Page {currentPage} of {totalPages}
-                            </span>
-                            <button
-                                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                                disabled={currentPage === totalPages}
-                            >
-                                Next
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

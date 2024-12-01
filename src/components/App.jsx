@@ -13,7 +13,7 @@ const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true); 
     const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
-    const baseURL_locally = ""
+    const baseURL_deploy2 = ""
     const checkAuth = () => {
         try {
             const user = JSON.parse(localStorage.getItem('user'));

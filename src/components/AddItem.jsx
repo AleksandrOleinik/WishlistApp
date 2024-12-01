@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
     const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
-    const baseURL_locally = "http://localhost:3001"
+    const baseURL_deploy2 = "http://localhost:3001"
     const [isAdding, setIsAdding] = useState(false);
     const [formData, setFormData] = useState({
         wishlist_id: '',
@@ -52,6 +52,7 @@ const AddItem = ({ user_id, activeWishlistId, refreshItems }) => {
                 description: '',
                 user_id: '',
                 link_shop: ''});
+            refreshItems(activeWishlistId)//this is new line
         } catch (error) {
             console.error('Error adding item:', error);
         }

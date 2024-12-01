@@ -12,7 +12,9 @@ const MainApp = ({ LoginStatus }) => {
     const [wishlists, setWishlists] = useState([]);
     const [refreshWishlists, setRefreshWishlists] = useState(false);
     const baseURL_deploy ="https://wishlistapp-backend.onrender.com"
-    const baseURL_locally = "http://localhost:3001"
+    const baseURL_deploy2 = "http://localhost:3001"
+    const baseURL_view_deploy="https://wishlistapp.onrender.com"
+    const baseURL_view_deploy2="http://localhost:3000"
     const [currentPage, setCurrentPage] = useState(1); 
     const itemsPerPage = 6; 
 
@@ -95,7 +97,7 @@ const MainApp = ({ LoginStatus }) => {
 
     return (
         <div>
-            <Header Logout={handleLogout} user={user} baseURL_deploy={baseURL_deploy}/>
+            <Header Logout={handleLogout} user={user} baseURL_view_deploy={baseURL_view_deploy}/>
             <div className="main_page">
                 <div className="main_container">
                     <WishlistMenu
